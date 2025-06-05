@@ -11,6 +11,7 @@ const UserPosition = () =>{
             const coords = await getUserGeoloc();
             if(coords){
                 setPosition(coords);
+                console.log("youhou")
             }
         }
 
