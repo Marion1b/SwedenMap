@@ -1,0 +1,74 @@
+{
+    "ABBA musuem":{
+        "name": "ABBA museum",
+        "description":"Sweden s most famous musical export has its museum on the island of Djurgården. Follow in Agnetha, Björn, Benny, and Anni-Frid s footsteps and discover how ABBA became a global disco phenomenon in an interactive exhibition.",
+        "geoloc":[
+            59.324978656781425, 
+            18.096976526297937
+        ],
+        "category":"museum"
+    },
+    "Royal national city park":{
+        "name":"Royal national city park",
+        "description":"he island of Djurgården has been a destination for recreation and entertainment for centuries. A big portion of the Royal National City Park (established in 1995; the first of its kind in the world) is located here; its lush, green nature contrasts with inner city Stockholm's busy streets just a short walk away.",
+        "geoloc":[
+            59.32677819976535, 
+            18.126681909105127
+        ],
+        "category":"park"
+    },
+    "Tennstopet":{
+        "name":"Tennstopet",
+        "description":"Everything on Tennstopet's menu is a Swedish classic. Even if some dishes aren't originally from Sweden, they're Swede-ish; an import that has become integral to Swedish cuisine. If you're looking for 100% Swedish authenticity just ask the staff for help, they're experienced, helpful, and often very direct and fast to make decisions for you (which is a pretty un-Swedish way to be).",
+        "geoloc":[
+            59.341978383196775, 
+            18.045618481509702
+        ],
+        "category":"restaurant"
+    },
+    "Bak":{
+        "name":"Bak",
+        "description":"This bakery started off as a small and luxurious spot in the city – the owners of Bak have been responsible for the dessert at the Nobel Banquet twice.",
+        "geoloc":[
+            59.301601470096365, 
+            18.08422726862479
+        ],
+        "category":"coffee"
+    },
+    "Carrefour city":{
+        "name":"Carrefour city",
+        "description":"Un carrefour pas fou avec des fruits et légumes tout flétris et c'est cher. Le gars à la caisse va demander à regarder votre sac et est aimable avec vous que si vous correspondez à ses critères de beauté.",
+        "geoloc":[
+            48.118088259710696, 
+            -1.707562255197529
+        ],
+        "category":"magasin"
+    },
+    "Les champs libres":{
+        "name":"Les Champs libres",
+        "description":"Un des meilleurs endroits de Rennes. Il y a une bibliothèque sur 6 étages, plusieurs salles d'exposition, un planétarium vraiment bien et un super café.",
+        "geoloc":[
+            48.10546934427833, 
+            -1.674755489373228
+        ],
+        "category":"cultural"
+    },
+    "Café 1802":{
+        "name":"Café 1802",
+        "description":"Un super café. Leur café est le plus réputé de Rennes, on peut aussi manger le midi avec toujours une option vegan. Très bien pour le goûter également.",
+        "geoloc":[
+            48.11571930686552, 
+            -1.6788356998351661
+        ],
+        "category":"coffee"
+    },
+    "Musée des beaux arts":{
+        "name":"Musée des beaux arts",
+        "description":"J'y suis pas allée souvent mais il me fallait un musée pour la liste. C'est gratuit du coup au pire c'est pas grave. En vrai y a quand même des trucs sympas.",
+        "geoloc":[
+            48.10990488930539, 
+            -1.674772253489848
+        ],
+        "category":"museum"
+    }
+}
