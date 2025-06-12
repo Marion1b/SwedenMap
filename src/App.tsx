@@ -10,13 +10,13 @@ import { type LatLngExpression } from 'leaflet';
 
 function App() {
   const [pinPosition, setPinPosition] = useState<null|LatLngExpression>(null);
-  const [routingKey, setRoutingKey] = useState<number>(0);
 
   const LocationFinderDummy = () =>{
     useMapEvents({
         click(e) {
             setPinPosition(e.latlng);
-            // faire une fonction pour arrondir à la coord la plus proche dans le json pour éviter d'avoir une coordonnée qui ne correspond pas exactement à celle voulu
+            // get the nearest coords in the json
+            
         },
     });
     return null;
@@ -25,7 +25,6 @@ function App() {
   useEffect(() => {
     if (pinPosition) {
       console.log("Pin position set:", pinPosition);
-      setRoutingKey(prevKey =>prevKey+1);
     }
   }, [pinPosition]);
 
@@ -36,7 +35,7 @@ function App() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {pinPosition && <RoutingMachine key={routingKey} destinationLocation={pinPosition} />}
+      {pinPosition && <RoutingMachine destinationLocation={pinPosition} />}
       <PinContainer />
       <UserPosition />
     </MapContainer>
