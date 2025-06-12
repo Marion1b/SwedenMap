@@ -1,42 +1,22 @@
-interface Activity{
-    name:string;
-    description:string;
-    geoloc:[number,number];
-    category:string;
-}
-
-interface ActivityData{
-    [key:string]:Activity;
-}
-
-type ExpectedReturnType = {
-    data: ActivityData | null;
-    loading: boolean;
-    errorReturn: Error | null;
-};
-
-export const fetchDataActivities = async():Promise<ExpectedReturnType>  =>{
-
-    let data : ActivityData|null = null;
-    let loading : boolean = true;
-    let errorReturn : Error | null = null;
+export const fetchActivities = async() => {
+    const cache = await caches.open("my-cache");
+    const request = new Request("./lib/activities.json");
 
     try{
-        const response = await fetch("./lib/activities.json");
-        if(!response.ok){
-            throw new Error(`HTTP error! Status: ${response.status}`);
+        let cachedResponse = await cache.match(request);
+        if(cachedResponse){
+            const cachedData = await cachedResponse.json();
+            return cachedData;
         }
-        const responseData = await response.json();
-        data = responseData;
+
+        const response = await fetch(request);
+        await cache.put(request, response);
+
+        const data = await response.json();
+        console.log("Data added to cache:", data);
+        return data;
     }catch(error){
-        if(error instanceof(Error)){
-            errorReturn = error;
-        }else{
-            errorReturn = new Error('An unknowed error occured');
-        }
-        console.log(error);
-    }finally{
-        loading=false;
+        console.error("Error handling cache:", error);
+        throw error;
     }
-    return {data, loading, errorReturn};
-}
+};

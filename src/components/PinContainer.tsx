@@ -1,7 +1,7 @@
 import Pin from "./Pin";
 import { useState } from "react";
 import 'leaflet/dist/leaflet.css';
-import { fetchDataActivities } from "../utils/fetchActivities";
+import { fetchActivities } from "../utils/fetchActivities";
 
 
 interface Activity{
@@ -17,17 +17,15 @@ interface ActivityData{
 
 const PinContainer= () =>{
     const [data, setData]=useState<ActivityData | null>(null);
-    const[loading, setLoading]=useState<boolean>(true);
-    const[error, setError]=useState<Error | null >(null);
 
-    fetchDataActivities().then((result)=>{
-        setData(result.data);
-        setLoading(result.loading);
-        setError(result.errorReturn);
+    fetchActivities()
+    .then((result)=>{
+        const activities = result;
+        setData(activities)
     })
-
-    if(loading)return<p>Loading...</p>
-    if(error)return <p>Error:{error.message}</p>
+    .catch((error)=>{
+        console.error(error);
+    })
 
     return(
         <section className="pin-container">
