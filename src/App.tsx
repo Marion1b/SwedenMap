@@ -5,27 +5,35 @@ import { useEffect, useState } from 'react';
 import PinContainer from './components/PinContainer';
 import UserPosition from './components/UserPosition';
 import RoutingMachine from './components/RoutingMachine';
-import { LatLng, type LatLngExpression } from 'leaflet';
+import { type LatLngTuple } from 'leaflet';
 import { fetchActivities } from './utils/fetchActivities';
 
-interface LatLng{
-  [key:string]:number,
+interface Activity{
+    name:string;
+    description:string;
+    geoloc:LatLngTuple;
+    category:string;
+}
+
+interface Activities{
+    [key:string]:Activity;
 }
 
 
 function App() {
-  const [pinPosition, setPinPosition] = useState<null|LatLng>(null);
-  const [activitiesPositions, setActivitiesPositions]=useState<null|[[number, number]]>(null);
-  const [closestActivity, setClosestActivity]=useState<null|LatLngExpression>(null);
+  const [pinPosition, setPinPosition] = useState<null|LatLngTuple>(null); //position clicked
+  const [activitiesPositions, setActivitiesPositions]=useState<LatLngTuple[]>([]); // get all geoloc from the API
+  const [closestActivity, setClosestActivity]=useState<null|LatLngTuple>(null); // get geoloc of the closest activity clicked
 
-  useEffect(()=>{
-    const fetchAndSetActivities = async() => {
-      let allPositions: [[number, number]]=[];
+  //assign all geoloc from the api to activitiesPosition
+  useEffect(():void=>{
+    const fetchAndSetActivities = async():Promise<void |LatLngTuple[]> => {
+      let allPositions: LatLngTuple[]=[];
       fetchActivities()
-        .then((result)=>{
-          const activities = result;
+        .then((result:{})=>{
+          const activities:Activities = result;
           Object.keys(activities).map((key)=>{
-            const activity = activities[key];
+            const activity:Activity = activities[key];
             allPositions.push(activity.geoloc);
             return allPositions;
           }, []);
@@ -39,20 +47,24 @@ function App() {
   }, []);
   
 
-  const LocationFinderDummy = () =>{
+  // get clicked geoloc
+  const LocationFinderDummy = ():null =>{
     useMapEvents({
         click(e) {
-            setPinPosition(e.latlng);
+          setPinPosition([e.latlng.lat, e.latlng.lng]);
         },
     });
     return null;
   }
 
-  const getNearestActivity = (clickedPosition: null|LatLng):LatLngExpression|string =>{
+  // associate clicked geoloc to the nearest activity geoloc
+  const getNearestActivity = (clickedPosition: null|LatLngTuple):LatLngTuple|string =>{
     if(clickedPosition && activitiesPositions){
       let nearPoint:number|null = null;
+      //get key in the activitiesPosition array
       let nearLatLngKey:number = -1;
-      const diffLatLngClickedPosition:number = Math.abs(clickedPosition.lat - clickedPosition.lng);
+      const diffLatLngClickedPosition:number = Math.abs(clickedPosition[0] - clickedPosition[1]);
+
       for(let i = 0; i<activitiesPositions.length; i++){
         // calculate lat - lng
         const lat:number = activitiesPositions[i][0];
@@ -86,12 +98,16 @@ function App() {
     return `error, no correct clicked position or activities position`;
   }
 
-  console.log(getNearestActivity(pinPosition));
-
-
+  // watch clicked position to calculate the nearest activity
   useEffect(() => {
     if (pinPosition) {
-      setClosestActivity(getNearestActivity(pinPosition));
+      const nearestActivity = getNearestActivity(pinPosition);
+      if(nearestActivity && typeof nearestActivity === "object" && typeof nearestActivity[0] === 'number' && typeof nearestActivity[1] === 'number'){
+        setClosestActivity(nearestActivity);
+      }else{
+        console.error("error while getting the nearest activity");
+      }
+      
     }
   }, [pinPosition]);
 
@@ -102,7 +118,7 @@ function App() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {pinPosition && <RoutingMachine destinationLocation={closestActivity} />}
+      {closestActivity && <RoutingMachine destinationLocation={closestActivity} />}
       <PinContainer />
       <UserPosition />
     </MapContainer>
