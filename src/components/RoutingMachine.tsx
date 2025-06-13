@@ -4,21 +4,33 @@ import "../css/components/RoutingMachine.css";
 import { getUserGeoloc } from '../utils/getUserGeoloc';
 import { type LatLngExpression } from 'leaflet';
 import { useMap } from "react-leaflet";
-import {  useEffect } from "react";
-
-const createRoutingMachineLayer = (userLocation:LatLngExpression, destionationLocation: LatLngExpression, map: L.Map) =>{
-    const instance = L.Routing.control({
-        waypoints: [
-            L.latLng(userLocation),
-            L.latLng(destionationLocation),
-        ],
-        routeWhileDragging: true,
-    }).addTo(map);
-    return instance;
-}
+import {  useEffect, useRef } from "react";
 
 const RoutingMachine = ({destinationLocation}:{destinationLocation:LatLngExpression})=>{
     const map = useMap();
+    const routingControlRef = useRef<L.Routing.Control | null>(null);
+
+    const createRoutingMachineLayer = (userLocation:LatLngExpression, destionationLocation: LatLngExpression, map: L.Map) =>{
+        //remove the previous routing control isntance if it exists
+        if(routingControlRef.current){
+            map.removeControl(routingControlRef.current);
+        }
+
+        //Creat a new routing control instance
+        const instance = L.Routing.control({
+            waypoints: [
+                L.latLng(userLocation),
+                L.latLng(destionationLocation),
+            ],
+            routeWhileDragging: true,
+        }).addTo(map);
+
+        //store the new instance in the ref
+        routingControlRef.current = instance;
+        
+        return instance;
+    }
+
     
     useEffect(() => {
         getUserGeoloc().then((userLocation) => {
