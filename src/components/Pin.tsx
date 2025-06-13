@@ -1,12 +1,10 @@
 import type { LatLngExpression } from 'leaflet';
 import { Marker } from 'react-leaflet';
 
-const Pin = ({geoloc, classname}:{geoloc:LatLngExpression, classname:string}) =>{
+const Pin = ({geoloc}:{geoloc:LatLngExpression}) =>{
     return (
-        <div className={classname}>
-            <Marker position={geoloc}>
-            </Marker>
-        </div>
+        <Marker position={geoloc} >
+        </Marker>
     )
 }
 

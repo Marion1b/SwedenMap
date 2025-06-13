@@ -4,32 +4,41 @@ import "../css/components/RoutingMachine.css";
 import { getUserGeoloc } from '../utils/getUserGeoloc';
 import { type LatLngExpression } from 'leaflet';
 import { useMap } from "react-leaflet";
-import {  useEffect } from "react";
+import {  useEffect, useRef } from "react";
 
-const createRoutingMachineLayer = (userLocation:LatLngExpression, map: L.Map) =>{
-    console.log('Creating routing machine layer with user location:', userLocation);
-    const instance = L.Routing.control({
-        waypoints: [
-            L.latLng(userLocation),
-            L.latLng(48.11571930686552, 
-            -1.6788356998351661),
-        ],
-        routeWhileDragging: true,
-    }).addTo(map);
-    console.log('Routing machine layer created:', instance);
-    return instance;
-}
-
-const RoutingMachine = ()=>{
+const RoutingMachine = ({destinationLocation}:{destinationLocation:LatLngExpression})=>{
     const map = useMap();
+    const routingControlRef = useRef<L.Routing.Control | null>(null);
+
+    const createRoutingMachineLayer = (userLocation:LatLngExpression, destionationLocation: LatLngExpression, map: L.Map) =>{
+        //remove the previous routing control isntance if it exists
+        if(routingControlRef.current){
+            map.removeControl(routingControlRef.current);
+        }
+
+        //Creat a new routing control instance
+        const instance = L.Routing.control({
+            waypoints: [
+                L.latLng(userLocation),
+                L.latLng(destionationLocation),
+            ],
+            routeWhileDragging: true,
+        }).addTo(map);
+
+        //store the new instance in the ref
+        routingControlRef.current = instance;
+        
+        return instance;
+    }
+
     
     useEffect(() => {
         getUserGeoloc().then((userLocation) => {
             if (userLocation) {
-                createRoutingMachineLayer(userLocation, map);
+                createRoutingMachineLayer(userLocation, destinationLocation, map);
             }
         });
-    }, [map]);
+    }, [map, destinationLocation]);
 
     return null; // This component does not render anything itself
 };
