@@ -16,7 +16,7 @@ import { fetchActivities } from './utils/fetchActivities';
 import PinContainer from './components/PinContainer';
 import UserPosition from './components/UserPosition';
 import RoutingMachine from './components/RoutingMachine';
-import BurgerButton from './components/BurgerButton';
+import BurgerMenuContainer from './components/BurgerMenu/BurgerMenuContainer';
 
 interface Activity{
     name:string;
@@ -124,7 +124,7 @@ function App() {
   return (
     <MapContainer center={[48.117538802169086, -1.6750580634024201]} zoom={13} scrollWheelZoom={false}>
       <LocationFinderDummy />
-      <BurgerButton />
+      <BurgerMenuContainer />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
