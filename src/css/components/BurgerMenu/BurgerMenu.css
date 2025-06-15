@@ -7,10 +7,10 @@
     z-index: 999;
     background-color: var(--light-color-opacity-75);
     backdrop-filter: blur(10px);
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: var(--main-color);
     p{
         position: absolute;
         bottom: 30px;
@@ -24,8 +24,12 @@
         border-left : 5px solid transparent;
         transform: rotate(0.25turn);
         margin-right: 10px;
+        transition: transform 200ms ease-out;
     }
-    color: var(--main-color);
+    .triangle-open-true{
+        transform: rotate(0.5turn);
+        transition: transform 200ms ease-in;
+    }
     ul{
         display: flex;
         flex-direction: column;
@@ -33,6 +37,7 @@
         gap: 50px;
         list-style: none;
         li{
+            cursor: pointer;
             font-size: 1.6rem;
             font-weight: bold;
             display: flex;
@@ -42,8 +47,73 @@
     form{
         display: none;
         max-width: 160px;
+        label{
+            font-size: 0.8rem;
+        }
     }
     .affichage-open-true, .categories-open-true{
         display: block;
     }
+    .affichage-open-true{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        input{
+            padding: 0 15px;
+            border-radius: 50px;
+            border: 2px solid var(--secondary-color);
+            box-shadow: 1px 1px 2px var(--box-shadow);
+            background: radial-gradient(circle at 15%,var(--secondary-color)60%, var(--light-color) 61% 100%);
+        }
+        .affichage-active-false{
+            transition: all 300ms ease-out;
+            background-size: 50%;
+            background-repeat: no-repeat;
+        }
+        .affichage-active-true{
+            transition: all 300ms ease-in;
+            background-repeat: no-repeat;
+            background-size: 150%;
+        }
+    }
+    .categories-open-true{
+        fieldset{
+            border: none;
+            div{
+                display: flex;  
+                align-items: center;
+                input{
+                    opacity: 0;
+                    position: relative;
+                    z-index: 1000;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                }
+                .checkmark{
+                    position: relative;
+                    z-index: 999;
+                    top: 0;
+                    left: 0;
+                    transform: translateX(-15px);
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 3px;
+                    border: 1px solid var(--secondary-color);
+                    background-color: var(--light-color);
+                }
+                input:checked ~ .checkmark{
+                    background-color: var(--secondary-color);
+                }
+            }
+        }
+    }
+}
+
+.burger-menu-open-false{
+    display: none;
+}
+
+.burger-menu-open-true{
+    display: flex;
 }
