@@ -1,0 +1,62 @@
+@import url(../../_var.css);
+
+/*global style on button*/
+.burger-button{
+    position: absolute;
+    z-index: 1000;
+    top: 20px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    background-color: var(--light-color);
+    border: 3px solid var(--main-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    box-shadow: 2px 2px 2px var(--box-shadow);
+    transition: 200ms ease-in;
+    span{
+        display: block;
+        width: 15px;
+        height: 3px;
+        border-radius: 50px;
+        background: linear-gradient(to right, var(--main-color) 50%, var(--light-color) 50% 100%);
+        background-size: 200%;
+        transition: all 200ms ease-in;
+    }
+    span:first-child{
+        background: linear-gradient(to left, var(--main-color) 50%, var(--light-color) 50% 100%);
+        background-size: 200%;
+        background-position: right;
+    }
+    span:nth-child(2){
+        transform: rotate(0.5turn);
+        transition: all 300ms ease-in;
+    }
+    &:hover{
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 2px var(--box-shadow);
+    }
+}
+
+/*style for button when menu's open */
+.burger-button-true{
+    
+    span:first-child{
+        opacity: 0;
+        background-position: left;
+        transition: all 200ms ease-in;
+    }
+    span:nth-child(2){
+        transform: rotate(1turn) scaleX(1.3);
+        transition: all 300ms ease-in;
+    }
+    span:last-child{
+        opacity: 0;
+        background-position: right;
+        transition: all 200ms ease-in;
+    }
+}

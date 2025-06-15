@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: "Source Serif 4", serif;;
 }
 
 .leaflet-control-container .leaflet-routing-container-hide {
