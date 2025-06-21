@@ -9,8 +9,8 @@ const Login = () =>{
             <h1>Connexion</h1>
             <form action="/account" method="POST">
                 <div>
-                    <label htmlFor="username">Nom d'utilisateur-ice :</label>
-                    <input type="text" name="username" id="username" />
+                    <label htmlFor="email">Email :</label>
+                    <input type="email" name="email" id="email" />
                 </div>
                 <div>
                     <label htmlFor="password">Mot de passe :</label>
