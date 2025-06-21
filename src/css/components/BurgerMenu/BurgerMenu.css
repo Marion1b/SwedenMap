@@ -11,6 +11,14 @@
     justify-content: center;
     align-items: center;
     color: var(--main-color);
+    a{
+        text-decoration: none;
+        color: var(--main-color);
+        transition: transform 200ms ease-out;
+        &:hover{
+            transform: translateX(5px);
+        }
+    }
     p{
         position: absolute;
         bottom: 30px;
