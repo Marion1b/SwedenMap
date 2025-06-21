@@ -1,7 +1,10 @@
 import "../css/pages/Login.css";
+import BurgerMenuContainer from "../components/BurgerMenu/BurgerMenuContainer";
 
 const Login = () =>{
     return(
+        <>
+        <BurgerMenuContainer />
         <section className="login">
             <h1>Connexion</h1>
             <form action="/account" method="POST">
@@ -15,7 +18,9 @@ const Login = () =>{
                 </div>
                 <button type="submit">Connexion</button>
             </form>
+            <p>Pas de compte ? <a href="/register">Créer un compte</a></p>
         </section>
+        </>
     )
 }
 
