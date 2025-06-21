@@ -1,5 +1,5 @@
 //style
-import './App.css'
+import '../css/pages/App.css'
 
 //related to leaflet
 import { MapContainer, TileLayer, useMapEvents} from 'react-leaflet';
@@ -10,13 +10,13 @@ import { type LatLngTuple } from 'leaflet';
 import { useEffect, useState } from 'react';
 
 //utils
-import { fetchActivities } from './utils/fetchActivities';
+import { fetchActivities } from '../utils/fetchActivities';
 
 //components
-import PinContainer from './components/PinContainer';
-import UserPosition from './components/UserPosition';
-import RoutingMachine from './components/RoutingMachine';
-import BurgerMenuContainer from './components/BurgerMenu/BurgerMenuContainer';
+import PinContainer from '../components/PinContainer';
+import UserPosition from '../components/UserPosition';
+import RoutingMachine from '../components/RoutingMachine';
+import BurgerMenuContainer from '../components/BurgerMenu/BurgerMenuContainer';
 
 interface Activity{
     name:string;
