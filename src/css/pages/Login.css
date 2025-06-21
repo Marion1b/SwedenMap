@@ -1,0 +1,76 @@
+@import url(../_var.css);
+
+.login{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(0.30turn, var(--lighter-main-color-opacity-25), var(--light-color));
+    h1{
+        color: var(--main-color);
+        padding-bottom: 100px;
+        text-align: center;
+        font-size: 3rem;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        color: var(--main-color);
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            label{
+                font-size: 1rem;
+            }
+            input{
+                padding: 5px 10px;
+                border-radius: 10px;
+                border: 1px solid var(--main-color);
+                box-shadow: 2px 2px 2px var(--box-shadow);
+                transition: all 200ms ease-out;
+                &:focus{
+                    outline: none;
+                    border: 2px solid var(--main-color);
+                    box-shadow: none;
+                    transition: all 200ms ease-out;
+                }
+            }
+        }
+        button{
+            max-width: fit-content;
+            padding: 10px 50px;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 30px;
+            color: var(--main-color);
+            border: 1px solid var(--main-color);
+            box-shadow: 2px 2px 2px var(--box-shadow);
+            background: radial-gradient(circle at 15%,var(--lighter-main-color)40%, var(--light-color) 41% 100%);
+            background-size: 250%;
+            background-position: right;
+            font-weight: 600;
+            transition: all 200ms ease-out,
+                        background-position 300ms ease-out;
+            &:hover{
+                background-position: left;
+                color: var(--light-color);
+                transform: translate(2px, 2px);
+                box-shadow: none;
+            }
+        }
+    }
+    p{
+        margin-top: 50px;
+        font-size: 0.8rem;
+        a{
+            color: var(--secondary-color);
+            &:hover{
+                font-weight: 600;
+            }
+        }
+    }
+}

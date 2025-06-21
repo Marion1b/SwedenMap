@@ -27,6 +27,7 @@ const BurgerMenu = ({isOpen}:{isOpen:boolean}) =>{
     return(
         <nav className={`burger-menu burger-menu-open-${isOpen}`}>
             <ul>
+                <li><a href="/"><span className="triangle"></span>Carte</a></li>
                 <li><a href="/account"><span className="triangle"></span>Mon compte</a></li>
                 <div>
                     <li onClick={handleClickAffichage}><span className={`triangle triangle-open-${affichageOpen}`}></span>Affichage</li>
