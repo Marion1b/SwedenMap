@@ -1,3 +1,5 @@
+import "../css/pages/Login.css";
+
 const Login = () =>{
     return(
         <section className="login">
@@ -11,7 +13,7 @@ const Login = () =>{
                     <label htmlFor="password">Mot de passe :</label>
                     <input type="password" name="password" id="password" />
                 </div>
-                <button type="submit">connexion</button>
+                <button type="submit">Connexion</button>
             </form>
         </section>
     )
