@@ -7,11 +7,17 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(0.30turn, var(--lighter-main-color-opacity-25), var(--light-color));
+    .login-container{
+        padding: 50px 75px;
+        background: var(--light-color-opacity-50);
+        border: 1px solid var(--main-color-opacity-50);
+        border-radius: 10px;
+    }
     h1{
         color: var(--main-color);
-        padding-bottom: 100px;
+        padding-bottom: 40px;
         text-align: center;
-        font-size: 3rem;
+        font-size: 2rem;
     }
     form{
         display: flex;
@@ -27,23 +33,31 @@
                 font-size: 1rem;
             }
             input{
-                padding: 5px 10px;
-                border-radius: 10px;
-                border: 1px solid var(--main-color);
-                box-shadow: 2px 2px 2px var(--box-shadow);
+                padding: 2px 5px;
+                border-radius: 5px;
+                border: none;
+                font-size: 0.8rem;
+                color: var(--main-color);
+                box-shadow: 1px 1px 1px var(--main-color-opacity-25),
+                            -1px -1px 1px var(--main-color-opacity-25),
+                            -1px 1px 1px var(--main-color-opacity-25),
+                            1px -1px 1px var(--main-color-opacity-25);
                 transition: all 200ms ease-out;
                 &:focus{
                     outline: none;
-                    border: 2px solid var(--main-color);
-                    box-shadow: none;
+                    border: 1px solid var(--main-color);
                     transition: all 200ms ease-out;
                 }
+            }
+            label{
+                font-size: 0.8rem;
             }
         }
         button{
             cursor: pointer;
             max-width: fit-content;
-            padding: 10px 50px;
+            padding: 5px 25px;
+            font-size: 1rem;
             border-radius: 10px;
             margin: auto;
             margin-top: 30px;
@@ -53,7 +67,7 @@
             background: radial-gradient(circle at 15%,var(--lighter-main-color)40%, var(--light-color) 41% 100%);
             background-size: 250%;
             background-position: right;
-            font-weight: 600;
+            font-weight: 400;
             transition: all 200ms ease-out,
                         background-position 300ms ease-out;
             &:hover{
@@ -66,7 +80,7 @@
     }
     p{
         margin-top: 50px;
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         a{
             color: var(--secondary-color);
             &:hover{
