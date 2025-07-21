@@ -49,6 +49,13 @@
                     transition: all 200ms ease-out;
                 }
             }
+            .password-error-false, .password-no-same-false{
+                display: none;
+            }
+            .password-error-true, .password-no-same-true{
+                display: block;
+                color: var(--secondary-color);
+            }
             label{
                 font-size: 0.8rem;
             }

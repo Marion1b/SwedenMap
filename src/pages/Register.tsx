@@ -1,14 +1,68 @@
 import "../css/pages/Register.css";
 import BurgerMenuContainer from "../components/BurgerMenu/BurgerMenuContainer";
+import Routes from "../api";
+import { useState } from "react";
+
+const route = new Routes;
 
 const Register = () => {
+
+    const [errorPassword, setErrorPassword] = useState<boolean>(false);
+    const [errorPasswordNoSame, setErrorPasswordNoSame] = useState<boolean>(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+        const formData = new FormData(form);
+
+        setErrorPassword(false);
+        setErrorPasswordNoSame(false);
+
+        const email:string|undefined = formData.get('email')?.toString();
+        const pseudo:string|undefined = formData.get('pseudo')?.toString();
+        const password:string|undefined = formData.get('password')?.toString();
+        const verifyPassword:string|undefined = formData.get("password-verify")?.toString();
+        
+        //verify password security
+        if(password && verifyPassword){
+            if(!validatePassword(password)){
+                setErrorPassword(true);
+                return `password error`;
+            }else if(!checkPasswords(password, verifyPassword)){
+                setErrorPasswordNoSame(true);
+                return `passwords no same`;
+            }
+        }
+
+        //check all fields
+        /*if(email && pseudo && password){
+            return route.register({email,pseudo,password});
+        }else{
+            return `missing field`;
+        }*/
+
+    }
+
+    const validatePassword = (password:string) =>{
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{12,}$/;
+        return regex.test(password);
+    }
+
+    const checkPasswords = (password:string, secondPassword:string) => {
+        if(password === secondPassword){
+            return true;
+        }
+        return false;
+    }
+
     return(
         <>
             <BurgerMenuContainer />
             <section className="register">
                 <div className="register-container">
                     <h1>Inscription</h1>
-                    <form action="/account" method="post">
+                    <form onSubmit={handleSubmit} method="post">
                         <div>
                             <label htmlFor="email">Email :</label>
                             <input type="email" name="email" id="email" required />
@@ -18,12 +72,14 @@ const Register = () => {
                             <input type="text" name="username" id="username" required />
                         </div>
                         <div>
+                            <p className={`password-error-${errorPassword}`}>Le mot de passe doit contenir au moins 12 caractères, une majuscule, un caractère spécial et un chiffre.</p>
                             <label htmlFor="password">Mot de passe :</label>
                             <input type="password" name="password" id="password" required />
                         </div>
                         <div>
+                            <p className={`password-no-same-${errorPasswordNoSame}`}>Les mots de passe ne correspondent pas.</p>
                             <label htmlFor="password-verify">Vérification du mot de passe :</label>
-                            <input type="password" name="password-verify" id="password-veriry" required />
+                            <input type="password" name="password-verify" id="password-verify" required />
                         </div>
                         <button type="submit">S'inscrire</button>
                     </form>
