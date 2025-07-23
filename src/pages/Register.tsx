@@ -9,8 +9,11 @@ const Register = () => {
 
     const [errorPassword, setErrorPassword] = useState<boolean>(false);
     const [errorPasswordNoSame, setErrorPasswordNoSame] = useState<boolean>(false);
+    const [emailAlreadyExist, setEmailAlreadyExist] = useState<boolean>(false);
+    const [usernameAlreadyExist, setUsernameAlreadyExist] = useState<boolean>(false);
+    const [unknownError, setUnknownError] = useState<boolean>(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -18,9 +21,12 @@ const Register = () => {
 
         setErrorPassword(false);
         setErrorPasswordNoSame(false);
+        setEmailAlreadyExist(false);
+        setUsernameAlreadyExist(false);
+        setUnknownError(false);
 
         const email:string|undefined = formData.get('email')?.toString();
-        const pseudo:string|undefined = formData.get('pseudo')?.toString();
+        const username:string|undefined = formData.get('username')?.toString();
         const password:string|undefined = formData.get('password')?.toString();
         const verifyPassword:string|undefined = formData.get("password-verify")?.toString();
         
@@ -36,11 +42,35 @@ const Register = () => {
         }
 
         //check all fields
-        /*if(email && pseudo && password){
-            return route.register({email,pseudo,password});
+        if(email && username && password){
+            try{
+                const response = await route.register({email,username,password});
+                if (response && typeof response === 'object' && 'status' in response){
+                    if(response.status === "success" && response.apiResponse.message === "user created"){
+                        sessionStorage.setItem("userId", response.apiResponse.user.userId);
+                        sessionStorage.setItem("email",response.apiResponse.user.email);
+                        sessionStorage.setItem("username", response.apiResponse.user.username);
+                        sessionStorage.setItem('accessToken', response.apiResponse.accessToken);
+                        return
+                    }
+                    if(response.status === "success" && response.apiResponse.message === "Email already registered"){
+                        setEmailAlreadyExist(true);
+                        return
+                    }
+                    if(response.status === "success" && response.apiResponse.message === "Username already used"){
+                        setUsernameAlreadyExist(true);
+                        return
+                    }else{
+                        setUnknownError(true);
+                        return
+                    }
+                }
+            }catch(error){
+                console.error(error);
+            }
         }else{
             return `missing field`;
-        }*/
+        }
 
     }
 

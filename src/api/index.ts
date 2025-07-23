@@ -1,6 +1,6 @@
 interface dataToSendRegister {
     email: string,
-    pseudo: string,
+    username: string,
     password: string
 }
 
@@ -12,7 +12,7 @@ export default class Routes{
             if(!this.apiUrl){
                 return console.error('api url is undefined');
             }
-            const response = await fetch(this.apiUrl,{
+            const response = await fetch(`${this.apiUrl}/users/register`,{
                 method:'POST',
                 headers:{
                     'Content-type':'application/json'
@@ -27,6 +27,7 @@ export default class Routes{
             const apiResponse = await response.json();
             return {apiResponse, error:null, status:'success'};
         }catch(error){
+            console.log(error);
             return{apiResponse:null, error:error, status:'error'};
         }
     }
