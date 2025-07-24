@@ -24,6 +24,29 @@
         flex-direction: column;
         gap: 20px;
         color: var(--main-color);
+        .handle-error{
+            p{
+                color: var(--secondary-color);
+                font-size: 0.8rem;
+                max-width: 200px;
+                margin-top: 0;
+            }
+            .error-password-true::after{
+                content:'Le mot de passe doit contenir au moins 12 caractères, une majuscule, un caractère spécial et un chiffre.';
+            }
+            .error-password-no-same-true::after{
+                content:'Les mots de passe ne correspondent pas.';
+            }
+            .error-email-exist-true::after{
+                content:'Un compte avec cet email existe déjà.';
+            }
+            .error-username-exist-true::after{
+                content: 'Ce nom d\'utilisateur existe déjà.';
+            }
+            .unknown-error-true::after{
+                content: 'Une erreur innatendue est survenue, veuillez contacter notre support.';
+            }
+        }
         div{
             display: flex;
             flex-direction: column;
@@ -48,6 +71,9 @@
                     border: 1px solid var(--main-color);
                     transition: all 200ms ease-out;
                 }
+            }
+            .email-true, .username-true, .password-true, .password-verify-true{
+                border: 2px solid var(--secondary-color);
             }
             label{
                 font-size: 0.8rem;
