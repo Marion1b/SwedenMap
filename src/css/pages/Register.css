@@ -49,12 +49,23 @@
                     transition: all 200ms ease-out;
                 }
             }
-            .password-error-false, .password-no-same-false{
-                display: none;
-            }
-            .password-error-true, .password-no-same-true{
-                display: block;
+            .handle-error{
                 color: var(--secondary-color);
+                .error-password-true::after{
+                    content:'Le mot de passe doit contenir au moins 12 caractères, une majuscule, un caractère spécial et un chiffre.';
+                }
+                .error-password-no-same-true::after{
+                    content:'Les mots de passe ne correspondent pas.';
+                }
+                .error-email-exist-true::after{
+                    content:'Un compte avec cet email existe déjà.';
+                }
+                .error-username-exist-true::after{
+                    content: 'Ce nom d\'utilisateur existe déjà.';
+                }
+                .unknown-error-true::after{
+                    content: 'Une erreur innatendue est survenue, veuillez contacter notre support.';
+                }
             }
             label{
                 font-size: 0.8rem;

@@ -97,6 +97,9 @@ const Register = () => {
                 <div className="register-container">
                     <h1>Inscription</h1>
                     <form onSubmit={handleSubmit} method="post">
+                        <div className={`handle-error`}>
+                            <p className={`error-password-${errorPassword} error-password-no-same-${errorPasswordNoSame} error-email-exist-${emailAlreadyExist}error-username-exist-${usernameAlreadyExist} unknown-error-${unknownError}`}></p>
+                        </div>
                         <div>
                             <label htmlFor="email">Email :</label>
                             <input type="email" name="email" id="email" required />
@@ -106,12 +109,10 @@ const Register = () => {
                             <input type="text" name="username" id="username" required />
                         </div>
                         <div>
-                            <p className={`password-error-${errorPassword}`}>Le mot de passe doit contenir au moins 12 caractères, une majuscule, un caractère spécial et un chiffre.</p>
                             <label htmlFor="password">Mot de passe :</label>
                             <input type="password" name="password" id="password" required />
                         </div>
                         <div>
-                            <p className={`password-no-same-${errorPasswordNoSame}`}>Les mots de passe ne correspondent pas.</p>
                             <label htmlFor="password-verify">Vérification du mot de passe :</label>
                             <input type="password" name="password-verify" id="password-verify" required />
                         </div>
