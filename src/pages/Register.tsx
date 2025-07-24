@@ -98,23 +98,23 @@ const Register = () => {
                     <h1>Inscription</h1>
                     <form onSubmit={handleSubmit} method="post">
                         <div className={`handle-error`}>
-                            <p className={`error-password-${errorPassword} error-password-no-same-${errorPasswordNoSame} error-email-exist-${emailAlreadyExist}error-username-exist-${usernameAlreadyExist} unknown-error-${unknownError}`}></p>
+                            <p className={`error-password-${errorPassword} error-password-no-same-${errorPasswordNoSame} error-email-exist-${emailAlreadyExist} error-username-exist-${usernameAlreadyExist} unknown-error-${unknownError}`}></p>
                         </div>
                         <div>
                             <label htmlFor="email">Email :</label>
-                            <input type="email" name="email" id="email" required />
+                            <input type="email" name="email" id="email" className={`email-${emailAlreadyExist}`} required />
                         </div>
                         <div>
                             <label htmlFor="username">Nom d'utilisateur-ice</label>
-                            <input type="text" name="username" id="username" required />
+                            <input type="text" name="username" id="username" className={`username-${usernameAlreadyExist}`} required />
                         </div>
                         <div>
                             <label htmlFor="password">Mot de passe :</label>
-                            <input type="password" name="password" id="password" required />
+                            <input type="password" name="password" id="password" className={`password-${errorPassword}`} required />
                         </div>
                         <div>
                             <label htmlFor="password-verify">Vérification du mot de passe :</label>
-                            <input type="password" name="password-verify" id="password-verify" required />
+                            <input type="password" name="password-verify" id="password-verify" className={`password-verify-${errorPasswordNoSame}`} required />
                         </div>
                         <button type="submit">S'inscrire</button>
                     </form>

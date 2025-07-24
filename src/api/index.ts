@@ -21,7 +21,7 @@ export default class Routes{
             })
 
             if(!response.ok){
-                throw new Error('Network response was not ok');
+                console.error(response);
             }
 
             const apiResponse = await response.json();
