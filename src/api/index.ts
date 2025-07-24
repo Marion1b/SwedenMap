@@ -5,7 +5,7 @@ interface dataToSendRegister {
 }
 
 export default class Routes{
-    private apiUrl:string|undefined = import.meta.env.VITE_API_URL;
+    private apiUrl:string|undefined = import.meta.env.dev.VITE_API_URL;
 
     public async register(data:dataToSendRegister){
         try{

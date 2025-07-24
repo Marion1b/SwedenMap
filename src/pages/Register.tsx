@@ -2,6 +2,7 @@ import "../css/pages/Register.css";
 import BurgerMenuContainer from "../components/BurgerMenu/BurgerMenuContainer";
 import Routes from "../api";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const route = new Routes;
 
@@ -12,6 +13,8 @@ const Register = () => {
     const [emailAlreadyExist, setEmailAlreadyExist] = useState<boolean>(false);
     const [usernameAlreadyExist, setUsernameAlreadyExist] = useState<boolean>(false);
     const [unknownError, setUnknownError] = useState<boolean>(false);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -51,6 +54,7 @@ const Register = () => {
                         sessionStorage.setItem("email",response.apiResponse.user.email);
                         sessionStorage.setItem("username", response.apiResponse.user.username);
                         sessionStorage.setItem('accessToken', response.apiResponse.accessToken);
+                        navigate('/');
                         return
                     }
                     if(response.status === "success" && response.apiResponse.message === "Email already registered"){

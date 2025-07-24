@@ -15,7 +15,13 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />} />
-        <Route path="/account" element={<Account />}/>
+        {/** check if a user is logedin */}
+        {sessionStorage.getItem('userId') 
+          ? sessionStorage.getItem('accessToken')
+            ? <Route path="/account" element={<Account />}/>
+            : <Route path="/account" element={<Login />}/>
+          : <Route path="/account" element={<Login />}/>
+        }
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />} />
       </Routes>
