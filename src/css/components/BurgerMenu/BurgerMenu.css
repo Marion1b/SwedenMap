@@ -14,10 +14,6 @@
     a{
         text-decoration: none;
         color: var(--main-color);
-        transition: transform 200ms ease-out;
-        &:hover{
-            transform: translateX(5px);
-        }
     }
     p{
         position: absolute;
@@ -50,6 +46,10 @@
             font-weight: bold;
             display: flex;
             align-items: center;
+            transition: transform 200ms ease-out;
+        &:hover{
+            transform: translateX(5px);
+        }
         }
     }
     form{

@@ -6,8 +6,8 @@
     z-index: 1000;
     top: 20px;
     right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: var(--light-color);
     border: 1px solid var(--main-color);
     border-radius: 5px;
@@ -15,12 +15,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
     box-shadow: 1px 1px 2px var(--box-shadow);
     transition: 200ms ease-in;
     span{
         display: block;
-        width: 8px;
+        width: 14px;
         height: 1px;
         border-radius: 50px;
         background: linear-gradient(to right, var(--main-color) 50%, var(--light-color) 50% 100%);
