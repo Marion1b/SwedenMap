@@ -12,6 +12,8 @@
         background: var(--light-color-opacity-50);
         border: 1px solid var(--main-color-opacity-50);
         border-radius: 10px;
+        box-shadow: 4px 4px 4px var(--box-shadow);
+        backdrop-filter: blur(4px);
     }
     h1{
         color: var(--main-color);
