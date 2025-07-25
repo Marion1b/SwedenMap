@@ -1,29 +1,52 @@
 //React
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter as Router, Routes, Route } from 'react-router'
 
 //style
 import './css/index.css'
+
+//protected route
+import ProtectedRoute from './components/ProtectedRoute.tsx'
 
 //pages
 import App from './pages/App.tsx'
 import Account from './pages/Account.tsx'
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
+import CreateMap from './pages/CreateMap.tsx'
+
+const user = {
+  userId: sessionStorage.getItem('userId')||undefined,
+  accessToken: sessionStorage.getItem('accessToken')||undefined
+}
 
 createRoot(document.getElementById('root')!).render(
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path='/' element={<App />} />
-        {/** check if a user is logedin */}
-        {sessionStorage.getItem('userId') 
-          ? sessionStorage.getItem('accessToken')
-            ? <Route path="/account" element={<Account />}/>
-            : <Route path="/account" element={<Login />}/>
-          : <Route path="/account" element={<Login />}/>
-        }
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />} />
+
+        {/**Protected routes */}
+        <Route 
+          path="/account"
+          element={
+            <ProtectedRoute user={user}>
+              <Account />
+            </ProtectedRoute>
+
+          }
+        />
+
+        <Route 
+          path="/create-map"
+          element={
+            <ProtectedRoute user={user}>
+              <CreateMap />
+            </ProtectedRoute>
+
+          }
+        />
       </Routes>
-    </BrowserRouter>
+    </Router>
 )

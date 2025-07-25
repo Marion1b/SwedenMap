@@ -33,10 +33,11 @@ const Login = () =>{
                 const response = await route.login({email, password});
                 if(response && typeof response === 'object' && 'status' in response){
                     if(response.status === "success" && response.apiResponse.message === "User loged in"){
+                        console.log(response);
                         sessionStorage.setItem("userId", response.apiResponse.user.userId);
                         sessionStorage.setItem("email", response.apiResponse.user.email);
                         sessionStorage.setItem("username", response.apiResponse.user.username);
-                        sessionStorage.setItem("accessToken", response.apiResponse.accessToken);
+                        sessionStorage.setItem("accessToken", response.apiResponse.access_JWT);
                         navigate('/');
                         return;
                     }if(response.status === "error"){
