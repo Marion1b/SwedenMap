@@ -57,17 +57,19 @@ const Register = () => {
                         navigate('/');
                         return
                     }
-                    if(response.status === "success" && response.apiResponse.message === "Email already registered"){
-                        setEmailAlreadyExist(true);
-                        return
-                    }
-                    if(response.status === "success" && response.apiResponse.message === "Username already used"){
-                        setUsernameAlreadyExist(true);
-                        return
-                    }else{
-                        setUnknownError(true);
-                        return
-                    }
+                    if(response.status === "error"){
+                        if(response.apiResponse.message === "Email already registered"){
+                            setEmailAlreadyExist(true);
+                            return
+                        }
+                        if(response.apiResponse.message === "Username already used"){
+                            setUsernameAlreadyExist(true);
+                            return
+                        }else{
+                            setUnknownError(true);
+                            return
+                        }
+                    } 
                 }
             }catch(error){
                 console.error(error);
