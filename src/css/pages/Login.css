@@ -53,6 +53,7 @@
                 border-radius: 5px;
                 border: none;
                 font-size: 0.8rem;
+                background: var(--light-color);
                 color: var(--main-color);
                 box-shadow: 1px 1px 1px var(--main-color-opacity-25),
                             -1px -1px 1px var(--main-color-opacity-25),
