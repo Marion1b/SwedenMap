@@ -24,7 +24,7 @@
             flex-direction: column;
             gap: 20px;
             a{
-                list-style-type: none;
+                text-decoration: none;
                 color: var(--main-color);
             }
             li{
