@@ -1,7 +1,14 @@
 import BurgerMenuContainer from "../components/BurgerMenu/BurgerMenuContainer";
 import "../css/pages/Settings.css";
+import { useState } from "react";
 
 const Settings = () => {
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+    const handleModalOpen = () => {
+        setModalOpen(!modalOpen);
+    }
+
     return(
         <>
             <BurgerMenuContainer/>
@@ -12,6 +19,17 @@ const Settings = () => {
                         <fieldset>
                             <p className="fieldset-name">Informations de profil</p>
                             <div>
+                                <article className="modify-avatar" onClick={handleModalOpen}>
+                                    <img className="avatar" src={`/img/avatar/${sessionStorage.getItem('avatar')}.jpg`} alt="avatar" /> 
+                                    <i className="fi fi-br-pencil"></i>
+                                </article>
+                                <article className={`avatar-modal avatar-modal-open-${modalOpen}`}>
+                                    <ul>
+                                        <li><img src="/img/avatar/neige1.jpg" alt="petit chat trop mignon" /></li>
+                                        <li><img src="/img/avatar/neige2.jpg" alt="encore un petit chat trop mignon" /></li>
+                                        <li><img src="/img/avatar/neige3.jpg" alt="et oui c'est encore mon chat trop mignon" /></li>
+                                    </ul>
+                                </article>
                                 <label htmlFor="avatar">Changer d'avatar</label>
                                 <select id="avatar" name="avatar">
                                     <option value="neige1">neige1</option>
