@@ -1,13 +1,13 @@
 @import url(../_var.css);
 
-.register{
+.create-map{
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
     background: linear-gradient(0.30turn, var(--lighter-main-color-opacity-25), var(--light-color));
-    .register-container{
-        margin-top: 50px;
+    .create-map-container{
         padding: 50px 75px;
         background: var(--light-color-opacity-50);
         border: 1px solid var(--main-color-opacity-50);
@@ -28,25 +28,16 @@
         color: var(--main-color);
         .handle-error{
             p{
-                color: var(--secondary-color);
+                color:var(--secondary-color);
                 font-size: 0.8rem;
                 max-width: 200px;
                 margin-top: 0;
             }
-            .error-password-true::after{
-                content:'Le mot de passe doit contenir au moins 12 caractères, une majuscule, un caractère spécial et un chiffre.';
-            }
-            .error-password-no-same-true::after{
-                content:'Les mots de passe ne correspondent pas.';
-            }
-            .error-email-exist-true::after{
-                content:'Un compte avec cet email existe déjà.';
-            }
-            .error-username-exist-true::after{
-                content: 'Ce nom d\'utilisateur existe déjà.';
+            .error-email-true::after, .error-password-true::after{
+                content:'L\'email et/ou le mot de passe sont incorrects.';
             }
             .unknown-error-true::after{
-                content: 'Une erreur innatendue est survenue, veuillez contacter notre support.';
+                content:'Une erreur innatendue est survenue, veuillez contacter notre support.';
             }
         }
         div{
@@ -57,26 +48,26 @@
             label{
                 font-size: 1rem;
             }
-            input{
+            input, select{
                 padding: 2px 5px;
                 border-radius: 5px;
                 border: none;
                 font-size: 0.8rem;
                 color: var(--main-color);
-                background: var(--light-color);
                 box-shadow: 1px 1px 1px var(--main-color-opacity-25),
                             -1px -1px 1px var(--main-color-opacity-25),
                             -1px 1px 1px var(--main-color-opacity-25),
                             1px -1px 1px var(--main-color-opacity-25);
                 transition: all 200ms ease-out;
+                background: var(--light-color);
                 &:focus{
                     outline: none;
                     border: 1px solid var(--main-color);
                     transition: all 200ms ease-out;
                 }
             }
-            .email-true, .username-true, .password-true, .password-verify-true{
-                border: 2px solid var(--secondary-color);
+            select{
+                max-width: 160px;
             }
             label{
                 font-size: 0.8rem;
@@ -108,7 +99,6 @@
         }
     }
     p{
-        text-align: center;
         margin-top: 50px;
         font-size: 0.6rem;
         a{
