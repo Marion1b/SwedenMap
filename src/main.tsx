@@ -14,6 +14,7 @@ import Account from './pages/Account.tsx'
 import Login from './pages/Login.tsx'
 import Register from './pages/Register.tsx'
 import CreateMap from './pages/CreateMap.tsx'
+import Settings from './pages/Settings.tsx'
 
 const user = {
   userId: sessionStorage.getItem('userId')||undefined,
@@ -43,6 +44,16 @@ createRoot(document.getElementById('root')!).render(
           element={
             <ProtectedRoute user={user}>
               <CreateMap />
+            </ProtectedRoute>
+
+          }
+        />
+
+        <Route 
+          path="/settings"
+          element={
+            <ProtectedRoute user={user}>
+              <Settings />
             </ProtectedRoute>
 
           }

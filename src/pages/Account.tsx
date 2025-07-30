@@ -13,7 +13,7 @@ const Account = () => {
                         <a href="/create-map"><li><i className="fi fi-br-plus"></i>Créer une nouvelle map</li></a>
                         <li><i className="fi fi-br-map-point"></i>Consulter mes maps</li>
                         <li><i className="fi fi-br-bookmark"></i>Maps sauvegardées</li>
-                        <li><i className="fi fi-br-gears"></i>Paramètres</li>
+                        <a href="/settings"><li><i className="fi fi-br-gears"></i>Paramètres</li></a>
                     </ul>
                 </div>
             </section>

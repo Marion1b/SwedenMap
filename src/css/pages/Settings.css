@@ -1,0 +1,152 @@
+@import url(../_var.css);
+
+.settings{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 50px;
+    background: linear-gradient(0.30turn, var(--lighter-main-color-opacity-25), var(--light-color));
+    .settings-container{
+        margin-top: 100px;
+        padding: 25px 37px;
+        background: var(--light-color-opacity-50);
+        border: 1px solid var(--main-color-opacity-50);
+        border-radius: 10px;
+        box-shadow: 4px 4px 4px var(--box-shadow);
+        backdrop-filter: blur(4px);
+    }
+    h1{
+        color: var(--main-color);
+        padding-bottom: 40px;
+        text-align: center;
+        font-size: 2rem;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: var(--main-color);
+        p{
+            font-size: 0.8rem;
+            max-width: 200px;
+            margin-top: 0;
+        }
+        .fieldset-name{
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        fieldset{
+            border: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        fieldset:nth-child(1){
+            border-bottom: 1px solid var(--main-color-opacity-50);
+            padding-bottom: 50px;
+        }
+        fieldset:nth-child(2){
+            padding-top: 50px;
+        }
+        .handle-error{
+            p{
+                color:var(--secondary-color);
+            }
+            .error-email-true::after, .error-password-true::after{
+                content:'L\'email et/ou le mot de passe sont incorrects.';
+            }
+            .unknown-error-true::after{
+                content:'Une erreur innatendue est survenue, veuillez contacter notre support.';
+            }
+        }
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            label{
+                font-size: 1rem;
+            }
+            input, select{
+                padding: 2px 5px;
+                border-radius: 5px;
+                border: none;
+                font-size: 0.8rem;
+                background: var(--light-color);
+                color: var(--main-color);
+                box-shadow: 1px 1px 1px var(--main-color-opacity-25),
+                            -1px -1px 1px var(--main-color-opacity-25),
+                            -1px 1px 1px var(--main-color-opacity-25),
+                            1px -1px 1px var(--main-color-opacity-25);
+                transition: all 200ms ease-out;
+                &:focus{
+                    outline: none;
+                    border: 1px solid var(--main-color);
+                    transition: all 200ms ease-out;
+                }
+            }
+            select{
+                width: 160px;
+            }
+            .email-true, password-true{
+                border: 2px solid var(--secondary-color);
+            }
+            label{
+                font-size: 0.8rem;
+            }
+        }
+        button{
+            cursor: pointer;
+            max-width: fit-content;
+            padding: 5px 25px;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 30px;
+            color: var(--main-color);
+            border: 1px solid var(--main-color);
+            box-shadow: 2px 2px 2px var(--box-shadow);
+            background: radial-gradient(circle at 15%,var(--lighter-main-color)40%, var(--light-color) 41% 100%);
+            background-size: 250%;
+            background-position: right;
+            font-weight: 400;
+            transition: all 200ms ease-out,
+                        background-position 300ms ease-out;
+            &:hover{
+                background-position: left;
+                color: var(--light-color);
+                transform: translate(2px, 2px);
+                box-shadow: none;
+            }
+        }
+    }
+    .disconnect{
+            cursor: pointer;
+            max-width: fit-content;
+            padding: 5px 25px;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin: auto;
+            margin-top: 30px;
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+            box-shadow: 2px 2px 2px var(--box-shadow);
+            background: radial-gradient(circle at 15%,var(--secondary-color)40%, var(--light-color) 41% 100%);
+            background-size: 250%;
+            background-position: right;
+            font-weight: bold;
+            transition: all 200ms ease-out,
+                        background-position 300ms ease-out;
+            &:hover{
+                background-position: left;
+                color: var(--light-color);
+                transform: translate(2px, 2px);
+                box-shadow: none;
+            }
+        }
+    
+}
