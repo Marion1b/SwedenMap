@@ -53,6 +53,9 @@ const Register = () => {
                         sessionStorage.setItem("userId", response.apiResponse.user.userId);
                         sessionStorage.setItem("email",response.apiResponse.user.email);
                         sessionStorage.setItem("username", response.apiResponse.user.username);
+                        sessionStorage.setItem("avatar", response.apiResponse.user.avatar);
+                        sessionStorage.setItem("country", response.apiResponse.user.country);
+                        sessionStorage.setItem("city", response.apiResponse.user.city);
                         sessionStorage.setItem('accessToken', response.apiResponse.accessToken);
                         navigate('/');
                         return

@@ -4,9 +4,14 @@ import { useState } from "react";
 
 const Settings = () => {
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [avatar, setAvatar] = useState<string | null>(sessionStorage.getItem('avatar'));
 
     const handleModalOpen = () => {
         setModalOpen(!modalOpen);
+    }
+
+    const handleNewAvatar = (e) => {
+        setAvatar(e.target.dataset.index);
     }
 
     return(
@@ -20,22 +25,20 @@ const Settings = () => {
                             <p className="fieldset-name">Informations de profil</p>
                             <div>
                                 <article className="modify-avatar" onClick={handleModalOpen}>
-                                    <img className="avatar" src={`/img/avatar/${sessionStorage.getItem('avatar')}.jpg`} alt="avatar" /> 
+                                    <img className="avatar" src={`/img/avatar/${avatar}.jpg`} alt="avatar" /> 
                                     <i className="fi fi-br-pencil"></i>
                                 </article>
                                 <article className={`avatar-modal avatar-modal-open-${modalOpen}`}>
                                     <ul>
-                                        <li><img src="/img/avatar/neige1.jpg" alt="petit chat trop mignon" /></li>
-                                        <li><img src="/img/avatar/neige2.jpg" alt="encore un petit chat trop mignon" /></li>
-                                        <li><img src="/img/avatar/neige3.jpg" alt="et oui c'est encore mon chat trop mignon" /></li>
+                                        <li onClick={handleNewAvatar}><img src="/img/avatar/neige1.jpg" alt="petit chat trop mignon" data-index="neige1" /></li>
+                                        <li onClick={handleNewAvatar}><img src="/img/avatar/neige2.jpg" alt="encore un petit chat trop mignon" data-index="neige2" /></li>
+                                        <li onClick={handleNewAvatar}><img src="/img/avatar/neige3.jpg" alt="et oui c'est encore mon chat trop mignon" data-index="neige3" /></li>
                                     </ul>
                                 </article>
-                                <label htmlFor="avatar">Changer d'avatar</label>
-                                <select id="avatar" name="avatar">
-                                    <option value="neige1">neige1</option>
-                                    <option value="neige2">neige2</option>
-                                    <option value="neige3">neige3</option>
-                                </select>
+                                <div className="hidden-select-avatar">
+                                    <label htmlFor="avatar">Changer d'avatar</label>
+                                    <input type="text" name="new-avatar" id="new-avatar" value={avatar || "neige1"} />
+                                </div>
                             </div>
                             <div>
                                 <label htmlFor="new-username">Changer de nom :</label>
@@ -314,7 +317,7 @@ const Settings = () => {
                         <button type="submit">Modifier</button>
                     </form>
                 </div>
-                <button className="disconnect" onClick={()=>{sessionStorage.clear()}}>Se déconnecter</button>
+                <button className="disconnect" onClick={()=>{sessionStorage.clear(); location.reload()}}>Se déconnecter</button>
             </section>
         </>
     )
