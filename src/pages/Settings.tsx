@@ -39,6 +39,8 @@ const Settings = () => {
             formData.set("country", "");
         }
 
+        formData.set("userId", sessionStorage.getItem("userId") || "noId");
+
         //delete empty entries
         let data = Array
             .from(formData)
