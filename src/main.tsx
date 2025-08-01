@@ -50,7 +50,7 @@ createRoot(document.getElementById('root')!).render(
         />
 
         <Route 
-          path="/settings"
+          path={`/settings&userId=${sessionStorage.getItem('userId')}`}
           element={
             <ProtectedRoute user={user}>
               <Settings />

@@ -1,10 +1,20 @@
 import BurgerMenuContainer from "../components/BurgerMenu/BurgerMenuContainer";
 import "../css/pages/Settings.css";
 import { useState } from "react";
+import Routes from "../api";
+import { useNavigate } from "react-router";
+
+const route = new Routes;
 
 const Settings = () => {
+
+    const navigate = useNavigate();
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [avatar, setAvatar] = useState<string | null>(sessionStorage.getItem('avatar'));
+    const [errorEmail, setErrorEmail] = useState<boolean>(false);
+    const [errorUsername, setErrorUsername] = useState<boolean>(false);
+    const [errorNoDatasSend, setErrorNoDatasSend] = useState<boolean>(false);
+
 
     const handleModalOpen = () => {
         setModalOpen(!modalOpen);
@@ -14,13 +24,62 @@ const Settings = () => {
         setAvatar(e.target.dataset.index);
     }
 
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+
+        const form=e.target;
+        const formData = new FormData(form);
+
+        setErrorEmail(false);
+        setErrorUsername(false);
+        setErrorNoDatasSend(false);
+
+        //check country
+        if(formData.get("country")?.toString() === "default"){
+            formData.set("country", "");
+        }
+
+        //delete empty entries
+        let data = Array
+            .from(formData)
+            .filter(function([k,v]) {return v});
+
+        const result = Object.fromEntries(data);
+
+        //check datas has been send
+        if(Object.keys(result).length === 0){
+            setErrorNoDatasSend(true);
+            return;
+        }
+
+        if(Object.keys(result).length > 0){
+            try{
+                const response = await route.update(result);
+                if(response && typeof response === "object" && 'status' in response){
+                    if(response.status === 'success'){
+                        console.log(response);
+                        return;
+                    }
+                    if(response.status === "error"){
+                        console.error(response);
+                        return;
+                    }
+                }
+            }catch(error){
+                console.error(error)
+            }
+        }
+
+
+    }
+
     return(
         <>
             <BurgerMenuContainer/>
             <section className="settings">
                 <div className="settings-container">
                     <h1>Paramètres</h1>
-                    <form action="" method="POST">
+                    <form onSubmit={handleSubmit} method="PATCH">
                         <fieldset>
                             <p className="fieldset-name">Informations de profil</p>
                             <div>
@@ -47,7 +106,7 @@ const Settings = () => {
                             <div>
                                 <label htmlFor="country">Pays :</label>
                                 <select id="country" name="country" >
-                                    <option value="France">France</option>
+                                    <option value="default">--Choisir un pays</option>
                                     <option value="Afghanistan">Afghanistan</option>
                                     <option value="Åland Islands">Åland Islands</option>
                                     <option value="Albania">Albania</option>
@@ -317,7 +376,7 @@ const Settings = () => {
                         <button type="submit">Modifier</button>
                     </form>
                 </div>
-                <button className="disconnect" onClick={()=>{sessionStorage.clear(); location.reload()}}>Se déconnecter</button>
+                <button className="disconnect" onClick={()=>{sessionStorage.clear(); navigate("/")}}>Se déconnecter</button>
             </section>
         </>
     )
