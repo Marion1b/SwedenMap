@@ -41,7 +41,7 @@ const Login = () =>{
                         sessionStorage.setItem("country", response.apiResponse.user.country);
                         sessionStorage.setItem("city", response.apiResponse.user.city);
                         sessionStorage.setItem("accessToken", response.apiResponse.access_JWT);
-                        //navigate('/');
+                        navigate('/');
                         return;
                     }if(response.status === "error"){
                         if(response.apiResponse.message === 'Email does not exist in db'){

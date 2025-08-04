@@ -14,6 +14,9 @@ const Settings = () => {
     const [errorEmail, setErrorEmail] = useState<boolean>(false);
     const [errorUsername, setErrorUsername] = useState<boolean>(false);
     const [errorNoDatasSend, setErrorNoDatasSend] = useState<boolean>(false);
+    const [unknownError, setUnknownError] = useState<boolean>(false);
+    const [errorPassword, setErrorPassword] = useState<boolean>(false);
+    const [errorPasswordNoSame, setErrorPasswordNoSame] = useState<boolean>(false);
 
 
     const handleModalOpen = () => {
@@ -33,6 +36,7 @@ const Settings = () => {
         setErrorEmail(false);
         setErrorUsername(false);
         setErrorNoDatasSend(false);
+        setUnknownError(false);
 
         //check country
         if(formData.get("country")?.toString() === "default"){
@@ -59,12 +63,28 @@ const Settings = () => {
                 const response = await route.update(result);
                 if(response && typeof response === "object" && 'status' in response){
                     if(response.status === 'success'){
-                        console.log(response);
-                        return;
+                        sessionStorage.setItem("userId", response.apiResponse.user.userId);
+                        sessionStorage.setItem("email",response.apiResponse.user.email);
+                        sessionStorage.setItem("username", response.apiResponse.user.username);
+                        sessionStorage.setItem("avatar", response.apiResponse.user.avatar);
+                        sessionStorage.setItem("country", response.apiResponse.user.country);
+                        sessionStorage.setItem("city", response.apiResponse.user.city);
+                        sessionStorage.setItem('accessToken', response.apiResponse.accessToken);
+                        navigate('/');
+                        return
                     }
                     if(response.status === "error"){
-                        console.error(response);
-                        return;
+                        if(response.apiResponse.message === "Email already registered"){
+                            setErrorEmail(true);
+                            return;
+                        }
+                        if(response.apiResponse.message === "Username already used"){
+                            setErrorUsername(true);
+                            return;
+                        }else{
+                            setUnknownError(true);
+                            return;
+                        }
                     }
                 }
             }catch(error){
@@ -82,6 +102,9 @@ const Settings = () => {
                 <div className="settings-container">
                     <h1>Paramètres</h1>
                     <form onSubmit={handleSubmit} method="PATCH">
+                        <div className={`handle-error`}>
+                            <p className={`error-password-${errorPassword} error-password-no-same-${errorPasswordNoSame} error-email-exist-${errorEmail} error-username-exist-${errorUsername} error-no-data-send-${errorNoDatasSend} unknown-error-${unknownError}`}></p>
+                        </div>
                         <fieldset>
                             <p className="fieldset-name">Informations de profil</p>
                             <div>
@@ -102,8 +125,8 @@ const Settings = () => {
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="new-username">Changer de nom :</label>
-                                <input type="text" name="new-username" id="new-username" />
+                                <label htmlFor="username">Changer de nom :</label>
+                                <input type="text" name="username" id="username" className={`username-${errorUsername}`} />
                             </div>
                             <div>
                                 <label htmlFor="country">Pays :</label>
@@ -367,8 +390,8 @@ const Settings = () => {
                                 <input type="password" name="current-password" id="current-password" />
                             </div>
                             <div>
-                                <label htmlFor="new-password">Nouveau mot de passe :</label>
-                                <input type="password" name="new-password" id="new-password" />
+                                <label htmlFor="password">Nouveau mot de passe :</label>
+                                <input type="password" name="password" id="password" />
                             </div>
                             <div>
                                 <label htmlFor="verify-new-password">Vérification du nouveau mot de passe :</label>
