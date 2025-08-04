@@ -101,7 +101,7 @@ const Settings = () => {
             <section className="settings">
                 <div className="settings-container">
                     <h1>Paramètres</h1>
-                    <form onSubmit={handleSubmit} method="PATCH">
+                    <form onSubmit={handleSubmit} method="PUT">
                         <div className={`handle-error`}>
                             <p className={`error-password-${errorPassword} error-password-no-same-${errorPasswordNoSame} error-email-exist-${errorEmail} error-username-exist-${errorUsername} error-no-data-send-${errorNoDatasSend} unknown-error-${unknownError}`}></p>
                         </div>
